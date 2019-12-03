@@ -1,8 +1,8 @@
 var express = require("express"),
-  app = express(),
-  mongoose = require("mongoose"),
-  server = app.listen(3000, listening),
-  bodyParser = require("body-parser");
+  app       = express(),
+  mongoose  = require("mongoose"),
+  server    = app.listen(3000, listening),
+ bodyParser = require("body-parser");
 
 //******************************************for connecting to MONGODB-ATLAS database****************************** */
 //var mongoURI =
