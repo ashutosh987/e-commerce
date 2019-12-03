@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
-var commentSchema = new mongoose.Schema({
-  text: String, //what the comment is
+var likeSchema = new mongoose.Schema({
+  //what the comment is
   author: {
     //who has given the comment
     user_id: {
@@ -23,4 +23,4 @@ var commentSchema = new mongoose.Schema({
 
 //MAKING MODEL
 
-module.exports = mongoose.model("Comment", commentSchema);
+module.exports = mongoose.model("like", likeSchema);
