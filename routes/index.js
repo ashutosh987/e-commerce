@@ -13,18 +13,23 @@ router.get("/",function(req,res){
 router.get("/register",function(req,res){
     res.render(path.resolve(__dirname + "/../views/register"));
 });
-/*
+
 //handle sign  up logic
 router.post("/register",function(req,res){
-        var newUser=new User({username : req.body.username});
+        var newUser=new User({
+            name : req.body.name ,
+            email : req.body.email,
+            image : req.body.image,
+        });
         User.register(newUser,req.body.password,function(err,user){
             if(err){
                 console.log(err);  
-                return res.render(path.resolve(__dirname + "/../register"));
+                return res.render(path.resolve(__dirname + "/../views/register"));
             }
             else{
                 passport.authenticate("local")(req,res,function(){
-                    res.redirect("/campgrounds");
+                    console.log(user);
+                    res.redirect("/");
                 });
             }
         });
@@ -32,12 +37,12 @@ router.post("/register",function(req,res){
 
 //show login form
 router.get("/login",function(req,res){
-    res.render(path.resolve(__dirname + "/../login"));
+    res.render(path.resolve(__dirname + "/../views/login"));
 });
 //handling  login using  middleware
 //app.post("/login",middleware,callback);
 router.post("/login", passport.authenticate("local",{
-    successRedirect:"/campgrounds",
+    successRedirect:"/",
     failureRedirect:"/login"
 }) , function(req,res){    
 });
@@ -45,9 +50,8 @@ router.post("/login", passport.authenticate("local",{
 //logout route
 router.get("/logout",function(req,res){
     req.logOut();
-    res.render(path.resolve(__dirname + "/../campgrounds/views/landing"));
+    res.render(path.resolve(__dirname + "/../views/landing"));
 });
-*/
 //middleware authentication
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
