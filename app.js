@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 app.use(indexRoutes);
+app.use("/products/:id/comments",commentRoutes);
 mongoose.connect("mongodb://localhost:27017/e_web", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
