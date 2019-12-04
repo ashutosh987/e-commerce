@@ -1,3 +1,4 @@
 # e-commerse
 
-there is some problem with the register route ...check  if you can  correct  it
+i  have edited  the  comment  route  
+now you can edit  the  product  routes
