@@ -46,6 +46,73 @@ router.post("/",isLoggedIn,function(req,res){
     
 });
 
+
+//EDIT  ROUTE FOR  COMMENT
+router.get("/:comment_id/edit",checkCommentOwnership,function(req,res){
+    Comment.findById(req.params.comment_id,function(err,foundComment){
+        if(err){
+            res.redirect("back");
+        }
+        else{
+            res.render("edit_comment",{product_id:req.params.id , comment:foundComment});
+        }
+        
+    })
+
+});
+
+//UPDATE COMMENT  ROUTE
+router.put("/:comment_id",checkCommentOwnership,function(req,res){
+    //find and update the campground
+    Comment.findByIdAndUpdate(req.params.comment_id,req.body.comment,function(err,updatedcomment){
+        if(err){
+            res.redirect("/products");
+        }
+        else{
+            res.redirect("/products/"+req.params.id);
+        }
+    });
+});
+
+//DELETE  ROUTE
+router.delete("/:comment_id",checkCommentOwnership,function(req,res){
+    //find and update the campground
+    Comment.findByIdAndRemove(req.params.comment_id,function(err,updatedcomment){
+        if(err){
+            res.redirect("back");
+        }
+        else{
+            res.redirect("/products/"+req.params.id);
+        }
+    });
+});
+
+
+
+//middleware authentication
+function checkCommentOwnership(req,res,next){
+    if(req.isAuthenticated()){
+        Comment.findById(req.params.comment_id,function(err,foundComment){
+            if(err){
+                    res.redirect("/products");
+            }
+            else{
+                //does user  own the comment
+                if(foundComment.author.user_id.equals(req.user._id)){
+                    next();
+                }
+                else{
+                    res.redirect("back")
+                }
+            }
+    
+        });
+    }
+    else{
+        res.redirect("back")
+    }
+
+}
 //middleware authentication
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){

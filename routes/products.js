@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const multer = require("multer");
+var Comment       = require("../models/comment");
+var User          = require("../models/user");
 
 const Product = require("../models/product");
 
@@ -83,13 +85,13 @@ router.post("/new", upload.single("product"), (req, res, next) => {
 //SHOW ROUTE--for detail about each campgrounds
 router.get("/:id", function(req, res) {
   Product.findById(req.params.id)
-    // .populate("comments")
+    .populate("comments")
     .exec(function(err, foundproduct) {
       if (err) {
         console.log(err);
       } else {
         console.log(foundproduct);
-        res.render("products/show", { product: foundproduct });
+        res.render("products/show", { product: foundproduct ,currentUser:req.user });
       }
     });
 });
