@@ -12,8 +12,21 @@ var express = require("express"),
   methodOverride = require("method-override"),
   commentRoutes = require("./routes/comments"),
   productRoutes = require("./routes/products");
+//************************************************ */
+
+const path = require("path");
+const crypto = require("crypto");
+
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+
+//************************************************** */
 
 app.use(express.static("uploads"));
+app.use(bodyParser.json());
+
+
 
 app.use(
   require("express-session")({
@@ -40,11 +53,25 @@ app.set("view engine", "ejs");
 
 app.use(indexRoutes);
 app.use("/products/:id/comments", commentRoutes);
-mongoose.connect("mongodb://localhost:27017/e_web", {
+
+
+mongoose.connect("mongodb://localhost:27017/e__web", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true
 });
+
+const conn = mongoose.createConnection("mongodb://localhost:27017/e__web", {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
+
+
+
+
+
+
 
 app.use("/products", productRoutes);
 

@@ -6,7 +6,9 @@
         this it the time to buy
       </p>
       <p>
-        <a class="btn btn-primary btn-large" href="/products/new">create new</a>
+        <a class="btn btn-primary btn-large" href="/products/upload"
+          >create new</a
+        >
       </p>
     </div>
   </header>
@@ -18,7 +20,7 @@
         <img
           width="200px"
           margin="1px"
-          src="<%=products.productimage.substring(8,products.productimage.length )%>"
+          src="/products/image/<%=products.productimage %>"
         />
         <div class="caption">
           <%=products.name%>

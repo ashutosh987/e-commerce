@@ -12,7 +12,7 @@
       <div class="thumbnail">
         <img
           class="img-responsive"
-          src="<%='/'+product.productimage.substring(8,product.productimage.length )%>"
+          src="/products/image/<%=product.productimage %>"
         />
         <div class="caption-full">
           <h4 class="pull-right">$400</h4>
@@ -49,7 +49,8 @@
             <strong> <%= comment.author.username%> </strong>
             <span class="pull-right">10 days ago</span>
             <p><%=comment.text%></p>
-            <% if(currentUser && comment.author.user_id.equals(currentUser._id)){ %>
+            <% if(currentUser &&
+            comment.author.user_id.equals(currentUser._id)){ %>
             <a
               class="btn btn-xs btn-warning"
               href="/products/<%=product._id%>/comments/<%=comment._id%>/edit"
