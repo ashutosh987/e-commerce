@@ -1,0 +1,32 @@
+<div class="container">
+  <header class="jumbotron">
+    <div class="container">
+      <h>hello products</h>
+      <p>
+        this it the time to buy
+      </p>
+      <p>
+        <a class="btn btn-primary btn-large" href="/products/new">create new</a>
+      </p>
+    </div>
+  </header>
+
+  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+    <% products.forEach(function(products){%>
+    <div class="col-md-3 col-sm-6">
+      <div class="thumbnail">
+        <img
+          width="200px"
+          margin="1px"
+          src="<%=products.productimage.substring(8,products.productimage.length )%>"
+        />
+        <div class="caption">
+          <%=products.name%>
+        </div>
+        <a href="/products/<%=products._id%>" class="btn btn-primary">detail</a>
+      </div>
+    </div>
+
+    <%});%>
+  </div>
+</div>
