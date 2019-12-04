@@ -50,7 +50,7 @@ router.post(
 //logout route
 router.get("/logout", function(req, res) {
   req.logOut();
-  res.render("/../views/landing");
+  res.render("landing");
 });
 //middleware authentication
 function isLoggedIn(req, res, next) {
