@@ -1,7 +1,11 @@
 # e-commerse
 
-half product routers works complete
+likes are added and all are interlinked...hopefully working
+find bug if found
 
-user login not included in products
+products models are changed 
+also,product routes are meesed up,
+we can later clean it...
+
 
 
