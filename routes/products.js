@@ -199,7 +199,7 @@ router.get("/:id", function(req, res) {
 mongoose.set("useFindAndModify", false);
 //update campground route
 //EDIT canpground route
-router.delete("/:id", (req, res) => {
+router.delete("/:id",middleware.checkProductOwnership, (req, res) => {
   Product.findById(req.params.id).exec(function(err, foundproduct) {
     if (err) {
       return res.render("landing", {
