@@ -52,6 +52,7 @@
               <h4><a><%=product.productname%></a></h4>
               <p><%=product.description%></p>
               <p><%=product.price%></p>
+              <p><%=product.likes.length%></p>
               <em>
                 <p>submitted by<%=product.seller.username+'$$$$$$' %></p>
               </em>
@@ -66,6 +67,40 @@
               >
                 <button class="btn btn-danger">delete</button>
               </form>
+              <%if(flag==1){%>
+              <form
+                id="like-form"
+                action="/products/like/<%=product._id%>?_method=PUT"
+                method="POST"
+              >
+                <button class="btn btn-success">like</button>
+              </form>
+
+              <form
+                id="unlike-form"
+                action="/products/unlike/<%=product._id%>?_method=PUT"
+                method="POST"
+              >
+                <button>unlike</button>
+              </form>
+
+              <%}else{%>
+              <form
+                id="like-form"
+                action="/products/like/<%=product._id%>?_method=PUT"
+                method="POST"
+              >
+                <button>like</button>
+              </form>
+              <form
+                id="unlike-form"
+                action="/products/unlike/<%=product._id%>?_method=PUT"
+                method="POST"
+              >
+                <button>unlike</button>
+              </form>
+
+              <%}%>
             </div>
           </div>
           <div class="well">

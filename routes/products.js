@@ -6,6 +6,7 @@ var Comment = require("../models/comment");
 var User = require("../models/user");
 
 const Product = require("../models/product");
+
 const path = require("path");
 const crypto = require("crypto");
 const middleware = require("../middleware/index");
@@ -112,6 +113,7 @@ router.post(
         username: req.user.username
       }
     });
+
     product.save();
     res.redirect("/");
   }
@@ -174,10 +176,22 @@ router.get("/:id", function(req, res) {
       if (err) {
         console.log(err);
       } else {
+        var t = 0;
+        var flag = 0;
+        foundproduct.likes.forEach(myFunction);
+
+        function myFunction(value) {
+          if (value.valueOf().equals(req.user._id)) {
+            t = 1;
+            // res.redirect("/products/" + foundProduct._id);
+          }
+        }
+
         //  console.log(foundproduct);
         res.render("products/show", {
           product: foundproduct,
-          currentUser: req.user
+          currentUser: req.user,
+          flag: t
         });
       }
     });
@@ -218,6 +232,87 @@ router.delete("/:id", (req, res) => {
           });
         }
       );
+    }
+  });
+});
+
+router.put("/like/:id", middleware.isLoggedIn, (req, res) => {
+  //check if post has already been liked
+  Product.findById(req.params.id, function(err, foundProduct) {
+    if (err) {
+      console.log(err);
+    } else {
+      var t = 0;
+      foundProduct.likes.forEach(myFunction);
+
+      function myFunction(value) {
+        if (value.valueOf().equals(req.user._id)) {
+          t = 1;
+          // res.redirect("/products/" + foundProduct._id);
+        }
+      }
+
+      if (t == 0) {
+        foundProduct.likes.push(req.user);
+        foundProduct.save();
+        console.log("already likeasfd");
+      }
+
+      if (t == 1) {
+        foundProduct.likes.forEach(myFunction);
+
+        function myFunction(value) {
+          if (value.valueOf().equals(req.user._id)) {
+            var index = foundProduct.likes.indexOf(value);
+            if (index > -1) {
+              foundProduct.likes.splice(index, 1);
+            }
+          }
+        }
+        console.log("already liked");
+      }
+
+      res.redirect("/products/" + foundProduct._id);
+    }
+  });
+});
+
+router.put("/unlike/:id", middleware.isLoggedIn, (req, res) => {
+  //check if post has already been liked
+  Product.findById(req.params.id, function(err, foundProduct) {
+    if (err) {
+      console.log(err);
+    } else {
+      var t = 0;
+      foundProduct.likes.forEach(myFunction);
+
+      function myFunction(value) {
+        if (value.valueOf().equals(req.user._id)) {
+          t = 1;
+          // res.redirect("/products/" + foundProduct._id);
+        }
+      }
+
+      if (t == 0) {
+        console.log("you dont have likes");
+      }
+
+      if (t == 1) {
+        foundProduct.likes.forEach(myFunction);
+
+        function myFunction(value) {
+          if (value.valueOf().equals(req.user._id)) {
+            var index = foundProduct.likes.indexOf(value);
+            if (index > -1) {
+              foundProduct.likes.splice(index, 1);
+              foundProduct.save();
+            }
+          }
+        }
+        console.log("now you have no likes");
+      }
+
+      res.redirect("/products/" + foundProduct._id);
     }
   });
 });
