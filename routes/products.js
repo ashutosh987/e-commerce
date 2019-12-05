@@ -8,7 +8,7 @@ var User = require("../models/user");
 const Product = require("../models/product");
 const path = require("path");
 const crypto = require("crypto");
-
+const middleware = require("../middleware/index");
 const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
 const mongoURI = "mongodb://localhost:27017/e__web";
@@ -81,8 +81,8 @@ router.get("/", function(req, res) {
       console.log(err);
     } else {
       res.render("products/index", {
-        products: allproducts
-        // currentUser: req.user
+        products: allproducts,
+        currentUser: req.user
       });
     }
   });
@@ -90,22 +90,32 @@ router.get("/", function(req, res) {
 
 //@route get/
 //@desc loads form
-router.get("/upload", (req, res) => {
+router.get("/upload", middleware.isLoggedIn, (req, res) => {
   res.render("product_regi", { files: false });
 });
 
 //@route POST/upload
 //@desc uploads file
-router.post("/upload", upload.single("file"), (req, res) => {
-  //res.json({ file: req.file });
-  const product = new Product({
-    productname: req.body.productname,
-    price: req.body.price,
-    productimage: req.file.filename
-  });
-  product.save();
-  res.redirect("/");
-});
+router.post(
+  "/upload",
+  middleware.isLoggedIn,
+  upload.single("file"),
+  (req, res) => {
+    //res.json({ file: req.file });
+
+    const product = new Product({
+      productname: req.body.productname,
+      price: req.body.price,
+      productimage: req.file.filename,
+      seller: {
+        id: req.user._id,
+        username: req.user.username
+      }
+    });
+    product.save();
+    res.redirect("/");
+  }
+);
 
 //@route GET/files
 //@desc display all file in json
@@ -171,6 +181,45 @@ router.get("/:id", function(req, res) {
         });
       }
     });
+});
+mongoose.set("useFindAndModify", false);
+//update campground route
+//EDIT canpground route
+router.delete("/:id", (req, res) => {
+  Product.findById(req.params.id).exec(function(err, foundproduct) {
+    if (err) {
+      return res.render("landing", {
+        currentUser: req.user
+      });
+    } else {
+      gfs.remove(
+        { filename: foundproduct.productimage, root: "uploads" },
+        (err, gridStore) => {
+          if (err) {
+            return res.render("landing", {
+              currentUser: req.user
+            });
+          }
+
+          Product.findByIdAndRemove(foundproduct._id, function(err) {
+            if (err) {
+              return res.render("landing", {
+                currentUser: req.user
+              });
+            } else {
+              return res.render("landing", {
+                currentUser: req.user
+              });
+            }
+          });
+
+          return res.render("landing", {
+            currentUser: req.user
+          });
+        }
+      );
+    }
+  });
 });
 
 //***************************************************************** */

@@ -1,78 +1,117 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <p class="lead">Yelpcamp</p>
-      <div class="list-group">
-        <li class="list-group-item active">item 1</li>
-        <li class="list-group-item">item 2</li>
-        <li class="list-group-item">item 3</li>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <div class="thumbnail">
-        <img
-          class="img-responsive"
-          src="/products/image/<%=product.productimage %>"
-        />
-        <div class="caption-full">
-          <h4 class="pull-right">$400</h4>
-          <h4><a><%=product.productname%></a></h4>
-          <p><%=product.description%></p>
-          <p><%=product.price%></p>
-          <em> <p>submitted by<%=product.seller.username+'$$$$$$' %></p> </em>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>e-web</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+  </head>
 
-          <a class="btn btn-warning" href="/products/<%=product._id%>/edit"
-            >Edit</a
-          >
-          <form
-            id="delete-form"
-            action="/products/<%=product._id%>?_method=DELETE"
-            method="POST"
-          >
-            <button class="btn btn-danger">delete</button>
-          </form>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">yelpcamp</a>
         </div>
-      </div>
-      <div class="well">
-        <div class="rext-right">
-          <a
-            class="btn btn-success"
-            href="/products/<%=product._id%>/comments/new"
-            >add new comments</a
-          >
-          <hr />
-        </div>
-        <% product.comments.forEach(function(comment){%>
 
-        <div class="row">
-          <div class="col-md-12">
-            <strong> <%= comment.author.username%> </strong>
-            <span class="pull-right">10 days ago</span>
-            <p><%=comment.text%></p>
-            <% if(currentUser &&
-            comment.author.user_id.equals(currentUser._id)){ %>
-            <a
-              class="btn btn-xs btn-warning"
-              href="/products/<%=product._id%>/comments/<%=comment._id%>/edit"
-            >
-              Edit</a
-            >
-            <form
-              id="delete-form"
-              action="/products/<%=product._id%>/comments/<%=comment._id%>?_method=DELETE"
-              method="POST"
-            >
-              <input
-                type="submit"
-                class="btn btn-xs btn-danger"
-                value="delete"
-              />
-            </form>
-            <% } %>
+        <ul class=" nav navbar-right">
+          <% if(!currentUser){ %>
+          <li><a href="/login">login </a></li>
+          <li><a href="/register">sign up </a></li>
+          <% }else{%>
+          <li>
+            <a href=""><b><%=currentUser.username%></b> </a>
+          </li>
+          <li><a href="/logout">sign out </a></li>
+          <%} %>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <p class="lead">Yelpcamp</p>
+          <div class="list-group">
+            <li class="list-group-item active">item 1</li>
+            <li class="list-group-item">item 2</li>
+            <li class="list-group-item">item 3</li>
           </div>
         </div>
-        <%})%>
+        <div class="col-md-9">
+          <div class="thumbnail">
+            <img
+              class="img-responsive"
+              src="/products/image/<%=product.productimage %>"
+            />
+            <div class="caption-full">
+              <h4 class="pull-right">$400</h4>
+              <h4><a><%=product.productname%></a></h4>
+              <p><%=product.description%></p>
+              <p><%=product.price%></p>
+              <em>
+                <p>submitted by<%=product.seller.username+'$$$$$$' %></p>
+              </em>
+
+              <a class="btn btn-warning" href="/products/<%=product._id%>/edit"
+                >Edit</a
+              >
+              <form
+                id="delete-form"
+                action="/products/<%=product._id%>?_method=DELETE"
+                method="POST"
+              >
+                <button class="btn btn-danger">delete</button>
+              </form>
+            </div>
+          </div>
+          <div class="well">
+            <div class="rext-right">
+              <a
+                class="btn btn-success"
+                href="/products/<%=product._id%>/comments/new"
+                >add new comments</a
+              >
+              <hr />
+            </div>
+            <% product.comments.forEach(function(comment){%>
+
+            <div class="row">
+              <div class="col-md-12">
+                <strong> <%= comment.author.username%> </strong>
+                <span class="pull-right">10 days ago</span>
+                <p><%=comment.text%></p>
+                <% if(currentUser &&
+                comment.author.user_id.equals(currentUser._id)){ %>
+                <a
+                  class="btn btn-xs btn-warning"
+                  href="/products/<%=product._id%>/comments/<%=comment._id%>/edit"
+                >
+                  Edit</a
+                >
+                <form
+                  id="delete-form"
+                  action="/products/<%=product._id%>/comments/<%=comment._id%>?_method=DELETE"
+                  method="POST"
+                >
+                  <input
+                    type="submit"
+                    class="btn btn-xs btn-danger"
+                    value="delete"
+                  />
+                </form>
+                <% } %>
+              </div>
+            </div>
+            <%})%>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <p>Trademark E-WEB 2019</p>
+  </body>
+</html>

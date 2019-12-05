@@ -1,8 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>e-web</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<h1>Add   a new  comment to  <%= product.productname %> </h1>
-<form action="/products/<%= product._id %>/comments" method="POST">
-    <input  type="text" name="comment[text]" placeholder="text">
-    <button> submit !</button>
-</form>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">yelpcamp</a>
+        </div>
 
-<a href="/products"  > Go Back!!! </a>
+        <ul class=" nav navbar-right">
+          <% if(!currentUser){ %>
+          <li><a href="/login">login </a></li>
+          <li><a href="/register">sign up </a></li>
+          <% }else{%>
+          <li>
+            <a href=""><b><%=currentUser.username%></b> </a>
+          </li>
+          <li><a href="/logout">sign out </a></li>
+          <%} %>
+        </ul>
+      </div>
+    </nav>
+
+    <h1>Add a new comment to <%= product.productname %></h1>
+    <form action="/products/<%= product._id %>/comments" method="POST">
+      <input type="text" name="comment[text]" placeholder="text" />
+      <button>submit !</button>
+    </form>
+
+    <a href="/products"> Go Back!!! </a>
+
+    <p>Trademark E-WEB 2019</p>
+  </body>
+</html>

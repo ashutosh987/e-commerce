@@ -3,10 +3,12 @@ var router = express.Router();
 
 var passport = require("passport");
 var User = require("../models/user");
-
+const middleware = require("../middleware/index");
 //HOME PAGE
 router.get("/", function(req, res) {
-  res.render("landing");
+  res.render("landing", {
+    currentUser: req.user
+  });
 });
 
 //  show register form

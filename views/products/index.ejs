@@ -1,34 +1,72 @@
-<div class="container">
-  <header class="jumbotron">
-    <div class="container">
-      <h>hello products</h>
-      <p>
-        this it the time to buy
-      </p>
-      <p>
-        <a class="btn btn-primary btn-large" href="/products/upload"
-          >create new</a
-        >
-      </p>
-    </div>
-  </header>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>e-web</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+  </head>
 
-  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-    <% products.forEach(function(products){%>
-    <div class="col-md-3 col-sm-6">
-      <div class="thumbnail">
-        <img
-          width="200px"
-          margin="1px"
-          src="/products/image/<%=products.productimage %>"
-        />
-        <div class="caption">
-          <%=products.name%>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">yelpcamp</a>
         </div>
-        <a href="/products/<%=products._id%>" class="btn btn-primary">detail</a>
+
+        <ul class=" nav navbar-right">
+          <% if(!currentUser){ %>
+          <li><a href="/login">login </a></li>
+          <li><a href="/register">sign up </a></li>
+          <% }else{%>
+          <li>
+            <a href=""><b><%=currentUser.username%></b> </a>
+          </li>
+          <li><a href="/logout">sign out </a></li>
+          <%} %>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <header class="jumbotron">
+        <div class="container">
+          <h>hello products</h>
+          <p>
+            this it the time to buy
+          </p>
+          <p>
+            <a class="btn btn-primary btn-large" href="/products/upload"
+              >create new</a
+            >
+          </p>
+        </div>
+      </header>
+
+      <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% products.forEach(function(products){%>
+        <div class="col-md-3 col-sm-6">
+          <div class="thumbnail">
+            <img
+              width="200px"
+              margin="1px"
+              src="/products/image/<%=products.productimage %>"
+            />
+            <div class="caption">
+              <%=products.name%>
+            </div>
+            <a href="/products/<%=products._id%>" class="btn btn-primary"
+              >detail</a
+            >
+          </div>
+        </div>
+
+        <%});%>
       </div>
     </div>
-
-    <%});%>
-  </div>
-</div>
+    <p>Trademark E-WEB 2019</p>
+  </body>
+</html>
