@@ -77,16 +77,31 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 router.get("/", function(req, res) {
-  Product.find({}, function(err, allproducts) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("products/index", {
-        products: allproducts,
-        currentUser: req.user
-      });
-    }
-  });
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+
+    Product.find({ productname: regex }, function(err, allproducts) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("products/index", {
+          products: allproducts,
+          currentUser: req.user
+        });
+      }
+    });
+  } else {
+    Product.find({}, function(err, allproducts) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("products/index", {
+          products: allproducts,
+          currentUser: req.user
+        });
+      }
+    });
+  }
 });
 
 //@route get/
@@ -199,7 +214,7 @@ router.get("/:id", function(req, res) {
 mongoose.set("useFindAndModify", false);
 //update campground route
 //EDIT canpground route
-router.delete("/:id",middleware.checkProductOwnership, (req, res) => {
+router.delete("/:id", middleware.checkProductOwnership, (req, res) => {
   Product.findById(req.params.id).exec(function(err, foundproduct) {
     if (err) {
       return res.render("landing", {
@@ -389,5 +404,8 @@ router.post("/product_regi", function(req, res) {
   }
 });
 */
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router;
