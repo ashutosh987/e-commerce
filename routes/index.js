@@ -28,7 +28,7 @@ router.post("/register", function(req, res) {
     } else {
       passport.authenticate("local")(req, res, function() {
         console.log(user);
-        res.redirect("/");
+        res.redirect("/profiles/new");
       });
     }
   });

@@ -10,9 +10,40 @@
     />
   </head>
 
-<h1>this is the profile page of <%= userName %></h1>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">E-WEB</a>
+        </div>
+
+        <ul class=" nav navbar-right">
+          <li>
+            <a href="#"><b><%=profile.username%></b> </a>
+          </li>
+          <li><a href="/logout">sign out </a></li>
+        </ul>
+      </div>
+    </nav>
+<div class="container">
+<h1>username : <%= profile.username %></h1>
+<h2>Name : <%= profile.name %></h2>
+<img
+           width="200px"
+           margin="5px"
+           src="<%=profile.image %>"
+/>
+<h3>Email:<%= profile.email %></h3>
+<a
+  class="btn btn-xs btn-warning"
+  href="/profiles/<%=profile._id%>/edit"
+>Edit Profile</a>
+
+<br>
+<a href="/products"> go to products</a>
 <h1>your wishlist goes here</h1>
 
+<h1>total cost is  <%=totalcost%> /-</h1>
  <% profile.products.forEach(function(product){%>
   <div class="row text-center" style="display:flex; flex-wrap: wrap;">
    <div class="col-md-3 col-sm-6">
@@ -26,13 +57,24 @@
          </div>
         
          <div class="caption-full">
-           <h4 class="pull-right">$400</h4>
            <h4><a><%=product.productname%></a></h4>
            <p><%=product.description%></p>
-           <p><%=product.price%></p>
+           <p>price : <%=product.price%>/-</p>
            <em>
-             <p>submitted by<%=product.seller.username+'$$$$$$' %></p>
+             <p>seller:<%=product.seller.username %></p>
+             <form
+                id="delete-form"
+                action="/profiles/<%=profile._id%>/<%=product._id%>?_method=DELETE"
+                method="POST"
+              >
+                <button class="btn btn-danger">remove from cart</button>
+              </form>
            </em>
          </div>
         </div>
+      
  <%})%>
+</div>
+ 
+ 
+

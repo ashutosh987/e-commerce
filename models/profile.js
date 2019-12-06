@@ -8,6 +8,9 @@ var profileSchema = new mongoose.Schema({
     }
     
   },
+  name:String,
+  image:String,
+  email:String,
   username: String,
   products: [
     //comments given by other users

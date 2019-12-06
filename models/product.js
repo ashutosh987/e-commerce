@@ -20,7 +20,6 @@ var productSchema = new mongoose.Schema({
   description: String, //description about the product
   price: { type: Number, required: true },
   likes: [
-    //comments given by other users
 
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -18,27 +18,25 @@
         </div>
 
         <ul class=" nav navbar-right">
-          <% if(!currentUser){ %>
-          <li><a href="/login">login </a></li>
-          <li><a href="/register">sign up </a></li>
-          <% }else{%>
           <li>
-            <a href=""><b><%=currentUser.username%></b> </a>
+            <a href="#"><b><%=profile.username%></b> </a>
           </li>
           <li><a href="/logout">sign out </a></li>
-          <%} %>
         </ul>
       </div>
     </nav>
+<div class="container">
+<h1>edit your profile</h1>
+    <form
+      action="/profiles/<%=profile._id%>"
+      method="POST"
+    >
 
-    <h1>Add a new comment to <%= product.productname %></h1>
-    <form action="/products/<%= product._id %>/comments" method="POST">
-      <input type="text" name="comment[text]" placeholder="text" />
+    <h4>name<h4><input type="text" name="name" value="<%=profile.name%>"/>
+    <h4>image<h4><input type="text" name="image" value="<%=profile.image%>"/>
+    <h4>email<h4><input type="text" name="email" value="<%=profile.email%>" />
       <button>submit !</button>
     </form>
 
-    <a href="/products"> Go Back!!! </a>
-
-    <p>Trademark E-WEB 2019</p>
-  </body>
-</html>
+    <a href="/profiles/<%=profile._id%>"> Go Back!!! </a>
+    </div>

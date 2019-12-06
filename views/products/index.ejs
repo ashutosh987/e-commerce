@@ -14,7 +14,7 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">yelpcamp</a>
+          <a class="navbar-brand" href="/">E_WEB</a>
         </div>
 
         <ul class=" nav navbar-right">
@@ -23,7 +23,12 @@
           <li><a href="/register">sign up </a></li>
           <% }else{%>
           <li>
-            <a href=""><b><%=currentUser.username%></b> </a>
+            <a href="#"><b><%=currentUser.username%></b> </a>
+          </li>
+          <li>
+            <form  action="/profiles" method="POST">
+              <button class="btn btn-success">profile</button>
+            </form>
           </li>
           <li><a href="/logout">sign out </a></li>
           <%} %>
