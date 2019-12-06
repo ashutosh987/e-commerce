@@ -5,13 +5,15 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   Comment = require("./models/comment"),
   Product = require("./models/product"),
+  Profile = require("./models/profile"),
   User = require("./models/user"),
   indexRoutes = require("./routes/index"),
   passport = require("passport"),
   LocalStrategy = require("passport-local"),
   methodOverride = require("method-override"),
   commentRoutes = require("./routes/comments"),
-  productRoutes = require("./routes/products");
+  productRoutes = require("./routes/products"),
+  profileRoutes = require("./routes/profiles");
 //************************************************ */
 
 const path = require("path");
@@ -53,6 +55,7 @@ app.set("view engine", "ejs");
 
 app.use(indexRoutes);
 app.use("/products/:id/comments", commentRoutes);
+app.use("/profiles", profileRoutes);
 
 
 mongoose.connect("mongodb://localhost:27017/e__web", {

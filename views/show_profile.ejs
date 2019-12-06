@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>e-web</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+  </head>
+
+<h1>this is the profile page of <%= userName %></h1>
+<h1>your wishlist goes here</h1>
+
+ <% profile.products.forEach(function(product){%>
+  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+   <div class="col-md-3 col-sm-6">
+       <div class="thumbnail">
+         <img
+           width="200px"
+           margin="5px"
+           src="/products/image/<%=product.productimage %>"
+         />
+         </div>
+         </div>
+        
+         <div class="caption-full">
+           <h4 class="pull-right">$400</h4>
+           <h4><a><%=product.productname%></a></h4>
+           <p><%=product.description%></p>
+           <p><%=product.price%></p>
+           <em>
+             <p>submitted by<%=product.seller.username+'$$$$$$' %></p>
+           </em>
+         </div>
+        </div>
+ <%})%>

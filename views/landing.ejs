@@ -25,6 +25,11 @@
           <li>
             <a href=""><b><%=currentUser.username%></b> </a>
           </li>
+          <li>
+            <form  action="/profiles" method="POST">
+              <button class="btn btn-success">profile</button>
+            </form>
+          </li>
           <li><a href="/logout">sign out </a></li>
           <%} %>
         </ul>
