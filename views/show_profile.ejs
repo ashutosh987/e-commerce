@@ -1,80 +1,61 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>e-web</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
-  </head>
+<%- include('header'); %>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">E-WEB</a>
+    </div>
 
-  <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">E-WEB</a>
-        </div>
-
-        <ul class=" nav navbar-right">
-          <li>
-            <a href="#"><b><%=profile.username%></b> </a>
-          </li>
-          <li><a href="/logout">sign out </a></li>
-        </ul>
-      </div>
-    </nav>
+    <ul class=" nav navbar-right">
+      <li>
+        <a href="#"><b><%=profile.username%></b> </a>
+      </li>
+      <li><a href="/logout">sign out </a></li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
-<h1>username : <%= profile.username %></h1>
-<h2>Name : <%= profile.name %></h2>
-<img
-           width="200px"
-           margin="5px"
-           src="<%=profile.image %>"
-/>
-<h3>Email:<%= profile.email %></h3>
-<a
-  class="btn btn-xs btn-warning"
-  href="/profiles/<%=profile._id%>/edit"
->Edit Profile</a>
+  <h1>username : <%= profile.username %></h1>
+  <h2>Name : <%= profile.name %></h2>
+  <img width="200px" margin="5px" src="<%=profile.image %>" />
+  <h3>Email:<%= profile.email %></h3>
+  <a class="btn btn-xs btn-warning" href="/profiles/<%=profile._id%>/edit"
+    >Edit Profile</a
+  >
 
-<br>
-<a href="/products"> go to products</a>
-<h1>your wishlist goes here</h1>
+  <br />
+  <a href="/products"> go to products</a>
+  <h1>your wishlist goes here</h1>
 
-<h1>total cost is  <%=totalcost%> /-</h1>
- <% profile.products.forEach(function(product){%>
+  <h1>total cost is <%=totalcost%> /-</h1>
+  <% profile.products.forEach(function(product){%>
   <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-   <div class="col-md-3 col-sm-6">
-       <div class="thumbnail">
-         <img
-           width="200px"
-           margin="5px"
-           src="/products/image/<%=product.productimage %>"
-         />
-         </div>
-         </div>
-        
-         <div class="caption-full">
-           <h4><a><%=product.productname%></a></h4>
-           <p><%=product.description%></p>
-           <p>price : <%=product.price%>/-</p>
-           <em>
-             <p>seller:<%=product.seller.username %></p>
-             <form
-                id="delete-form"
-                action="/profiles/<%=profile._id%>/<%=product._id%>?_method=DELETE"
-                method="POST"
-              >
-                <button class="btn btn-danger">remove from cart</button>
-              </form>
-           </em>
-         </div>
-        </div>
-      
- <%})%>
-</div>
- 
- 
+    <div class="col-md-3 col-sm-6">
+      <div class="thumbnail">
+        <img
+          width="200px"
+          margin="5px"
+          src="/products/image/<%=product.productimage %>"
+        />
+      </div>
+    </div>
 
+    <div class="caption-full">
+      <h4><a><%=product.productname%></a></h4>
+      <p><%=product.description%></p>
+      <p>price : <%=product.price%>/-</p>
+      <em>
+        <p>seller:<%=product.seller.username %></p>
+        <form
+          id="delete-form"
+          action="/profiles/<%=profile._id%>/<%=product._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger">remove from cart</button>
+        </form>
+      </em>
+    </div>
+  </div>
+
+  <%})%>
+</div>
+<%- include('footer'); %>

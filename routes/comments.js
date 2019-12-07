@@ -12,8 +12,7 @@ router.get("/new", isLoggedIn, function(req, res) {
       console.log(err);
     } else {
       res.render("new_comment", {
-        product: foundProduct,
-        currentUser: req.user
+        product: foundProduct
       });
     }
   });
