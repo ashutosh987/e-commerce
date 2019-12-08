@@ -79,7 +79,7 @@ app.set("view engine", "ejs");
 app.use("/products/:id/comments", commentRoutes);
 app.use("/profiles", profileRoutes);
 
-mongoose.connect("mongodb://localhost:27017/e__web", {
+mongoose.connect("mongodb://localhost:27017/e-web", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true

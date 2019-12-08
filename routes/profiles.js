@@ -7,7 +7,7 @@ var User          = require("../models/user");
 var passport      =require("passport");
 //show profile page
 router.post("/",isLoggedIn,function(req,res){
-  Profile.findOne({username :req.user.username}, function (err,foundprofile) {
+  Profile.findOne({id:req.user._id}, function (err,foundprofile) {
     if(err)console.log(err);
     else  if(foundprofile){ 
       console.log(foundprofile);
@@ -19,7 +19,7 @@ router.post("/",isLoggedIn,function(req,res){
             console.log(err);
         }
         else{
-            profile.profilename.id=req.user._id;
+            profile.id=req.user._id;
             profile.username=req.user.username;
             profile.save();
             console.log(profile);
@@ -40,7 +40,7 @@ router.post("/new",function(req,res){
             console.log(err);
         }
         else{
-            profile.profilename.id=req.user._id;
+            profile.id=req.user._id;
             profile.username=req.user.username;
             profile.name=req.body.name;
             profile.image=req.body.image;
@@ -73,7 +73,7 @@ router.get("/:id", function (req, res) {
 // adds new product
 router.post("/add/:prod_id",isLoggedIn,function(req,res){
   Product.findById(req.params.prod_id,function(err,foundProduct){
-  Profile.findOne({username :req.user.username}, function (err,foundprofile) {
+  Profile.findOne({id:req.user._id}, function (err,foundprofile) {
     if(err)console.log(err);
     else  if(foundprofile){ 
       foundprofile.products.push(foundProduct);
@@ -87,7 +87,7 @@ router.post("/add/:prod_id",isLoggedIn,function(req,res){
             console.log(err);
         }
         else{
-            profile.profilename.id=req.user._id;
+            profile.id=req.user._id;
             profile.username=req.user.username;
             profile.products.push(foundProduct);
             profile.save();
