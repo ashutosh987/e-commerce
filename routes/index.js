@@ -34,7 +34,7 @@ module.exports = function(app, passport) {
   app.post(
     "/register",
     passport.authenticate("local-signup", {
-      successRedirect: "/",
+      successRedirect: "/profiles/new",
       failureRedirect: "/register",
       failureFlash: true
     })
@@ -74,7 +74,7 @@ module.exports = function(app, passport) {
   app.post(
     "/login",
     passport.authenticate("local-login", {
-      successRedirect: "/",
+      successRedirect: "/profiles/new",
       failureRedirect: "/login"
     }),
     function(req, res) {}
@@ -88,7 +88,7 @@ module.exports = function(app, passport) {
   app.get(
     "/auth/facebook/callback",
     passport.authenticate("facebook", {
-      successRedirect: "/",
+      successRedirect: "/profiles/new",
       failureRedirect: "/"
     })
   );
@@ -101,7 +101,7 @@ module.exports = function(app, passport) {
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-      successRedirect: "/",
+      successRedirect: "/profiles/new",
       failureRedirect: "/login"
     })
   );

@@ -14,43 +14,39 @@ router.post("/",isLoggedIn,function(req,res){
       res.redirect("/profiles/"+foundprofile._id);
     }
     else{
-      Profile.create(req.user._id,function(err,profile){
-        if(err){
-            console.log(err);
-        }
-        else{
-            profile.id=req.user._id;
-            profile.username=req.user.username;
-            profile.save();
+      var profile = new Profile();
+              profile.id=req.user._id;
+              profile.save();
             console.log(profile);
             res.redirect("/profiles/"+profile._id);
         }
-      })
-    }
-  })
+    });
     });
 //new profile(get route)
 router.get("/new", function (req, res) {
+  Profile.findOne({id:req.user._id}, function (err,foundprofile) {
+    if(err)console.log(err);
+    else  if(foundprofile){ 
+      console.log(foundprofile);
+      res.redirect("/profiles/"+foundprofile._id);
+    }
+    else{
       res.render("new_profile");
-    });
+    }
+  });
+});
+    
 //handle the post route
 router.post("/new",function(req,res){
-      Profile.create(req.user._id,function(err,profile){
-        if(err){
-            console.log(err);
-        }
-        else{
+            var profile = new Profile();
             profile.id=req.user._id;
-            profile.username=req.user.username;
             profile.name=req.body.name;
             profile.image=req.body.image;
             profile.email=req.body.email;
             profile.save();
             console.log(profile);
             res.redirect("/profiles/"+profile._id);
-        }
           });
-    });
 
 router.get("/:id", function (req, res) {
     Profile.findById(req.params.id)
@@ -82,23 +78,16 @@ router.post("/add/:prod_id",isLoggedIn,function(req,res){
       res.redirect("/profiles/"+foundprofile._id);
     }
     else{
-      Profile.create(req.user._id,function(err,profile){
-        if(err){
-            console.log(err);
-        }
-        else{
+      var profile = new Profile();
             profile.id=req.user._id;
-            profile.username=req.user.username;
             profile.products.push(foundProduct);
             profile.save();
             console.log(profile);
             res.redirect("/profiles/"+profile._id);
-        }
-      })
-    }
+          }
+        });
   })
     });
-  });
 
 
 //EDIT  ROUTE FOR  PROFILE
