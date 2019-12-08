@@ -144,12 +144,14 @@ module.exports = function(passport) {
               newUser.google.token = accessToken;
               newUser.google.name = profile.displayName;
               newUser.google.email = profile.emails[0].value;
+              newUser.img = profile._json.picture;
 
               newUser.save(function(err) {
                 if (err) throw err;
                 return done(null, newUser);
               });
-              console.log(profile);
+              console.log(profile._json.picture);
+              console.log(345346346213);
             }
           });
         });

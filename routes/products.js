@@ -118,6 +118,12 @@ router.post(
   upload.single("file"),
   (req, res) => {
     //res.json({ file: req.file });
+    var t;
+    if (req.user.local.username) t = req.user.local.username;
+    else if (req.user.facebook.name) t = req.user.facebook.name;
+    else {
+      t = req.user.google.name;
+    }
 
     const product = new Product({
       productname: req.body.productname,
@@ -125,7 +131,8 @@ router.post(
       productimage: req.file.filename,
       seller: {
         id: req.user._id,
-        username: req.user.username
+
+        username: t
       }
     });
 

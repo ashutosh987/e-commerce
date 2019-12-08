@@ -30,7 +30,14 @@ router.post("/", isLoggedIn, function(req, res) {
         } else {
           //add username  and id to comment and save it
           comment.author.user_id = req.user._id;
-          comment.author.username = req.user.username;
+          if (req.user.local.username)
+            comment.author.username = req.user.local.username;
+          else if (req.user.facebook.name)
+            comment.author.username = req.user.facebook.name;
+          else {
+            comment.author.username = req.user.google.name;
+          }
+
           comment.product_name.product_id = foundProduct._id;
           comment.product_name.productname = foundProduct.productname;
           comment.save();

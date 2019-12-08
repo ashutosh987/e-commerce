@@ -23,14 +23,16 @@
           <p><%=product.price%></p>
           <p><%=product.likes.length%></p>
           <em>
-            <p>submitted by<%=product.seller.username+'$$$$$$' %></p>
+            <p>submitted by<b><%=product.seller.username %></b></p>
           </em>
 
           <a class="btn btn-warning" href="/products/<%=product._id%>/edit"
             >Edit</a
           >
           <form action="/profiles/add/<%=product._id%>" method="POST">
-            <button class="btn btn-info"><i class="fas fa-shopping-cart"></i>add to cart</button>
+            <button class="btn btn-info">
+              <i class="fas fa-shopping-cart"></i>add to cart
+            </button>
           </form>
 
           <form
