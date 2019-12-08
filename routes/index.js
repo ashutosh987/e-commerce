@@ -3,14 +3,23 @@ var router = express.Router();
 
 var passport = require("passport");
 var User = require("../models/user");
+var Profile = require("../models/profile");
 const middleware = require("../middleware/index");
 
 module.exports = function(app, passport) {
   //HOME PAGE
   app.get("/", function(req, res) {
-    res.render("landing", {
-      //currentUser: req.user
-    });
+    if(req.user){
+      Profile.findOne({id:req.user._id}, function (err,foundprofile) {
+        if(err)console.log(err);
+        else{
+          res.render("landing", {  currentProfile:foundprofile});
+        }  
+        });
+    }
+    else{
+    res.render("landing");
+    }
   });
 
   ////

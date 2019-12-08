@@ -35,6 +35,19 @@ app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
+
+app.use(function(req,res,next){
+  if(req.user){
+  Profile.findOne({id:req.user._id}, function (err,foundprofile) {
+    if(err)console.log(err);
+    else{
+      res.locals.currentProfile = foundprofile;
+    }  
+    });
+  }
+  next();
+});
+
 app.set("view engine", "ejs");
 require("./routes/index")(app, passport);
 //************************************************* */

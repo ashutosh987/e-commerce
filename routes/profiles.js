@@ -119,31 +119,28 @@ router.post("/:id", function(req, res) {
   });
 });
 
-//DELETE  PRODUCT
-router.delete("/:id/:prod_id", function(req, res) {
+//DELETE PRODUCT
+router.delete("/:id/:prod_id",  function(req, res) {
   //find the profile
-  Profile.update(
-    { _id: req.params.id },
-    { $pull: { products: req.params.prod_id } },
-    function(err, cb) {
-      if (err) console.log(err);
-      else {
-        Product.findById(req.params.prod_id, function(err, fp) {
-          if (err) console.log(err);
-          else {
-            Profile.findById(req.params.id, function(err, foundProfile) {
-              if (err) console.log(err);
-              else {
-                res.redirect("/profiles/" + req.params.id);
-              }
-            });
+Profile.findById(req.params.id,function(err,foundProfile){
+  if(err)console.log(err);
+  else{
+    foundProfile.products.forEach(myFunction);
+    function myFunction(value) {
+      if (value.valueOf().equals(req.params.prod_id)) {
+        var index = foundProfile.products.indexOf(value);
+          if(index>-1){
+          foundProfile.products.splice(index,1);
+          foundProfile.save();
+          return; 
           }
-        });
       }
     }
-  );
+    res.redirect("/profiles/" + req.params.id);
+  }
 });
-
+});
+ 
 //middleware authentication
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
