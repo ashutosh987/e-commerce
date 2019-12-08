@@ -35,13 +35,22 @@
             </form>
           </li>
           <%if(currentProfile){%>
-            <a  href="/profiles/new" >
-              <span><button class="btn btn-info"><i class="fas fa-shopping-cart"></i> <%=currentProfile.products.length%></button>
-              </span>
-               </a>
-               <%}%>
+          <a href="/profiles/new">
+            <span
+              ><button class="btn btn-info">
+                <i class="fas fa-shopping-cart"></i>
+                <%=currentProfile.products.length%>
+              </button>
+            </span>
+          </a>
+          <%}%>
           <li><a href="/logout">sign out </a></li>
           <%} %>
+          <a
+            href=" http://localhost:3000/paywithpaytm?amount=10"
+            class="btn btn-success"
+            ><b>PAY rs10 PLZ</b>
+          </a>
         </ul>
       </div>
     </nav>

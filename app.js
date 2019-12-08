@@ -15,11 +15,34 @@ var express = require("express"),
   productRoutes = require("./routes/products"),
   profileRoutes = require("./routes/profiles");
 //************************************************ */
+const cors = require("cors");
+require("dotenv").config();
+const { initPayment, responsePayment } = require("./paytm/services/index");
+app.use(cors());
+app.use(express.static(__dirname + "/views"));
+
+app.get("/paywithpaytm", (req, res) => {
+  initPayment(req.query.amount).then(
+    success => {
+      res.render("paytmRedirect.ejs", {
+        resultData: success,
+        paytmFinalUrl:
+          " https://securegw-stage.paytm.in/theia/processTransaction"
+      });
+    },
+    error => {
+      res.send(error);
+    }
+  );
+});
+
+//*****************************************88 */
 var cookieParser = require("cookie-parser");
 var morgan = require("morgan");
 var flash = require("connect-flash");
 var configDB = require("./config/database.js");
 var session = require("express-session");
+
 mongoose.connect(configDB.url);
 require("./config/passport")(passport);
 app.use(morgan("dev"));
@@ -36,13 +59,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(function(req,res,next){
-  if(req.user){
-  Profile.findOne({id:req.user._id}, function (err,foundprofile) {
-    if(err)console.log(err);
-    else{
-      res.locals.currentProfile = foundprofile;
-    }  
+app.use(function(req, res, next) {
+  if (req.user) {
+    Profile.findOne({ id: req.user._id }, function(err, foundprofile) {
+      if (err) console.log(err);
+      else {
+        res.locals.currentProfile = foundprofile;
+      }
     });
   }
   next();
@@ -105,6 +128,17 @@ const conn = mongoose.createConnection("mongodb://localhost:27017/e--web", {
 });
 
 app.use("/products", productRoutes);
+
+app.post("/paywithpaytmresponse", (req, res) => {
+  responsePayment(req.body).then(
+    success => {
+      res.render("response.ejs", { resultData: "true", responseData: success });
+    },
+    error => {
+      res.send(error);
+    }
+  );
+});
 
 //==============================================================================
 function listening() {
