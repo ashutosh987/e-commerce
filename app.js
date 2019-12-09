@@ -132,6 +132,16 @@ app.use("/products", productRoutes);
 app.post("/paywithpaytmresponse", (req, res) => {
   responsePayment(req.body).then(
     success => {
+      if (success["STATUS"] === "TXN_SUCCESS") {
+        Profile.findOne({ id: req.user._id }, function(err, foundprofile) {
+          if (err) console.log(err);
+          else {
+            foundprofile.products = [];
+            foundprofile.save();
+          }
+        });
+      }
+
       res.render("response.ejs", { resultData: "true", responseData: success });
     },
     error => {

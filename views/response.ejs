@@ -1,98 +1,89 @@
 <html>
-<head>
+  <head>
     <title>Merchant Check Out Page</title>
     <style>
-        body {
-            background-color: #ECEFF1;
-            font-family: Helvetica;
-        }
+      body {
+        background-color: #eceff1;
+        font-family: Helvetica;
+      }
 
-        .receipt {
-            width: 400px;
-            background-color: transparent;
-            margin: 80px auto 80px auto;
-        }
+      .receipt {
+        width: 400px;
+        background-color: transparent;
+        margin: 80px auto 80px auto;
+      }
 
-        .table-receipt {
-            border-radius: 10px;
-            border-bottom-left-radius: 0px;
-            border-bottom-right-radius: 0px;
-            width: 100%;
-            border-collapse: collapse;
-            box-shadow: -20px 30px 50px 0px #8d8d8d;
-            background-color: white;
-        }
+      .table-receipt {
+        border-radius: 10px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: -20px 30px 50px 0px #8d8d8d;
+        background-color: white;
+      }
 
-        .th-header {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            width: 100%;
-            background-color: #3a903e;
-            color: white;
-            padding: 24px;
-            font-size: 24px;
-        }
+      .th-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        width: 100%;
+        background-color: #3a903e;
+        color: white;
+        padding: 24px;
+        font-size: 24px;
+      }
 
-        .td-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #78909c;
-            padding: 12px 8px 12px 8px;
-            border-bottom: 1px solid #CFD8DC;
-        }
+      .td-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #78909c;
+        padding: 12px 8px 12px 8px;
+        border-bottom: 1px solid #cfd8dc;
+      }
 
-        .td-content {
-            font-size: 18px;
-            text-align: right;
-            padding: 12px 8px 12px 8px;
-            border-bottom: 1px solid #CFD8DC;
-        }
+      .td-content {
+        font-size: 18px;
+        text-align: right;
+        padding: 12px 8px 12px 8px;
+        border-bottom: 1px solid #cfd8dc;
+      }
 
-        .td-bottom {
-            width: 100%;
-            font-weight: 600;
-            color: #3a903e;
-            text-align: center;
-            padding: 24px;
-            font-size: 20px;
-        }
-
+      .td-bottom {
+        width: 100%;
+        font-weight: 600;
+        color: #3a903e;
+        text-align: center;
+        padding: 24px;
+        font-size: 20px;
+      }
     </style>
-</head>
-<body>
-<div class="receipt">
-    <!--    <% if (resultData == 'true') { %>
-    <center><h1>validation succesfull</h1></center>
-    <% }else
-    { %>
-    <center><h1>validation unsuccesfull</h1></center>
-    <% } %>-->
-    <table class="table-receipt">
+  </head>
+  <body>
+    <div class="receipt">
+      <% if (resultData == 'true') { %>
+      <center><h1>validation succesfull</h1></center>
+      <% }else { %>
+      <center><h1>validation unsuccesfull</h1></center>
+      <% } %>
+      <table class="table-receipt">
         <thead>
-        <tr>
-            <th class="th-header"
-                colspan="2">PAYMENT RECEIPT
-            </th>
-        </tr>
+          <tr>
+            <th class="th-header" colspan="2">PAYMENT RECEIPT</th>
+          </tr>
         </thead>
         <tbody>
-        <% for (name in responseData) {
-        %>
-        <% if(name !== "CHECKSUMHASH"){ %>
-        <tr>
+          <% for (name in responseData) { %> <% if(name !== "CHECKSUMHASH"&&name
+          !== "ORDERID"&&name !== " MID"&&name !== " RESPCODE"){ %>
+          <tr>
             <td class="td-title"><%= name %></td>
             <td class="td-content"><%= responseData[name] %></td>
-        </tr>
-        <% } %>
-        <% } %>
-        <tr>
-            <td class="td-bottom"
-                colspan="2">Thank you!.
-            </td>
-        </tr>
+          </tr>
+          <% } %> <% } %>
+          <tr>
+            <td class="td-bottom" colspan="2">Thank you!.</td>
+          </tr>
         </tbody>
-    </table>
-</div>
-
-</body>
+      </table>
+    </div>
+  </body>
 </html>
