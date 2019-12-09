@@ -73,7 +73,7 @@
         </thead>
         <tbody>
           <% for (name in responseData) { %> <% if(name !== "CHECKSUMHASH"&&name
-          !== "ORDERID"&&name !== " MID"&&name !== " RESPCODE"){ %>
+          !== "ORDERID"&&name !== "MID"&&name !== "RESPCODE"){ %>
           <tr>
             <td class="td-title"><%= name %></td>
             <td class="td-content"><%= responseData[name] %></td>
