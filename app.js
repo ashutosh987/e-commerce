@@ -86,7 +86,7 @@ const Grid = require("gridfs-stream");
 
 app.use(express.static("uploads"));
 app.use(bodyParser.json());
-
+app.use("/divisima", express.static("divisima"));
 /*
 
 app.use(
