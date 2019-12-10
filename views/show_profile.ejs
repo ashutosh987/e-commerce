@@ -1,56 +1,6 @@
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-  crossorigin="anonymous"
-/>
-<script
-  src="https://kit.fontawesome.com/04dcd0359c.js"
-  crossorigin="anonymous"
-></script>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">E-WEB</a>
-    </div>
-
-    <ul class=" nav navbar-right">
-      <li>
-        <a href="#"><b><%=profile.username%></b> </a>
-      </li>
-      <li><a href="/logout">sign out </a></li>
-      <li>
-        <a style="position: fixed;" href="/profiles/new">
-          <span
-            ><button class="btn btn-info">
-              <i class="fas fa-shopping-cart"></i> <%=profile.products.length%>
-            </button>
-          </span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<div class="container">
-  <h2>Name : <%= profile.name %></h2>
-  <img width="200px" margin="5px" src="<%=profile.image %>" />
-  <h3>Email:<%= profile.email %></h3>
-  <a class="btn btn-xs btn-warning" href="/profiles/<%=profile._id%>/edit"
-    >Edit Profile</a
-  >
-
-  <br />
-  <a href="/products"> go to products</a>
-  <h1>your wishlist goes here</h1>
-
-  <h1>total cost is <%=totalcost%> /-</h1>
-
-  <a
-    href=" http://localhost:3000/paywithpaytm?amount=<%=totalcost%>"
-    class="btn btn-success"
-    ><b>PAY NOW!</b>
-  </a>
+<%- include('profile_header'); %>
+  <!--<h2>Name : <%= profile.name %></h2>-->
+<!--
   <% profile.products.forEach(function(product){%>
   <div class="row text-center" style="display:flex; flex-wrap: wrap;">
     <div class="col-md-3 col-sm-6">
@@ -82,4 +32,61 @@
 
   <%})%>
 </div>
+-->
+<!-- cart section end -->
+<section class="cart-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="cart-table">
+          <h3>Your Cart</h3>
+          <div class="cart-table-warp">
+            <table>
+            <thead>
+              <tr>
+                <th class="product-th">Product</th>
+                <th class="product-th">Seller</th>
+                <th class="total-th">Remove</th>
+                <th class="total-th">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% profile.products.forEach(function(product){%>
+              <tr>
+                <td class="product-col">
+                  <img src="/products/image/<%=product.productimage %>" alt="">
+                  <div class="pc-title">
+                    <h4><%=product.productname%></h4>
+                  </div>
+                </td>
+                <td class="total-col"><h4><%=product.seller.username %></h4><%=product.seller.username %></td>
+                <td class="total-col">
+                  <form
+          id="delete-form"
+          action="/profiles/<%=profile._id%>/<%=product._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger">remove</button>
+        </form>
+                </td>
+                <td class="total-col"><h4><%=product.price%>/-</h4></td>
+              </tr>
+              <%})%>
+              
+            </tbody>
+          </table>
+          </div>
+          <div class="total-cost">
+            <h6>Total <span><%=totalcost%>/-</span></h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 card-right">
+        <a href=" http://localhost:3000/paywithpaytm?amount=<%=totalcost%>" class="site-btn">Proceed to checkout</a>
+        <a href="/products" class="site-btn sb-dark">Continue shopping</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- cart section end -->
 <%- include('footer'); %>
