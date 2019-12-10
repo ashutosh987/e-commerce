@@ -67,15 +67,12 @@
 
                   <a href=""><b><%=currentUser.google.username%></b> </a>
                   <div class="up-item">
-                    <form action="/profiles" method="POST">
-                      <button class="flaticon-profile" class="btn btn-danger">
-                        profile
-                      </button>
-                    </form>
+                    <%if(currentProfile){%>
+                      <div class="up-item">
+                        <i class="flaticon-profile"></i>
+                        <a href="/logout">sign out</a>
+                      </div>
                   </div>
-
-                  <%if(currentProfile){%>
-
                   <div class="up-item">
                     <div class="shopping-card">
                       <i class="flaticon-bag"></i>
@@ -85,9 +82,13 @@
                       <a href="/profiles/new">Shopping Cart</a>
                     </div>
                   </div>
-
+                  <a href="/profiles/<%=currentProfile._id%>/edit">
+                    <button class="flaticon-profile" class="btn btn-danger">
+                      profile
+                    </button>
+                  </a>
                   <%}%>
-                  <a href="/logout">sign out </a>
+                  
                   <%} %>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
   <head>
-    <title>Divisima | eCommerce Template</title>
+    <title>E-WEB</title>
     <meta charset="UTF-8" />
     <meta name="description" content=" Divisima | eCommerce Template" />
     <meta name="keywords" content="divisima, eCommerce, creative, html" />
@@ -55,7 +55,15 @@
               </a>
             </div>
             <div class="col-xl-6 col-lg-5">
-              
+              <form action="/products" method="GET" class="header-search-form">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="products search.."
+                  class="form-control"
+                />
+                <button><i class="flaticon-search"></i></button>
+              </form>
             </div>
             <div class="col-xl-4 col-lg-5">
               <div class="user-panel">
@@ -71,6 +79,11 @@
                   </div>
                   <a href="/profiles/new">Shopping Cart</a>
                 </div>
+                <a href="/profiles/<%=currentProfile._id%>/edit">
+                  <button class="flaticon-profile" class="btn btn-danger">
+                    profile
+                  </button>
+                </a>
                 <%}%>
                 <%} %>
               </div>
