@@ -43,28 +43,52 @@
           <div class="row">
             <div class="col-lg-2 text-center text-lg-left">
               <!-- logo -->
-              <a href="/divisima/index.html" class="site-logo">
-                <img src="/divisima/img/logo.png" alt="" />
-              </a>
+              <a href="/" class="site-logo">E-WEB </a>
             </div>
+
             <div class="col-xl-6 col-lg-5">
-              <form class="header-search-form">
-                <input type="text" placeholder="Search on divisima ...." />
+              <form action="/products" method="GET" class="header-search-form">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="products search.."
+                  class="form-control"
+                />
                 <button><i class="flaticon-search"></i></button>
               </form>
             </div>
             <div class="col-xl-4 col-lg-5">
-              <div class="user-panel">
+              <div class="user-panel" class="mx-auto">
                 <div class="up-item">
-                  <i class="flaticon-profile"></i>
-                  <a href="#">Sign</a> In or <a href="#">Create Account</a>
-                </div>
-                <div class="up-item">
-                  <div class="shopping-card">
-                    <i class="flaticon-bag"></i>
-                    <span>0</span>
+                  <% if(!currentUser){ %>
+                  <a href="/login">login </a>...or..
+                  <a href="/register">Create Account </a>
+                  <% }else{%>
+
+                  <a href=""><b><%=currentUser.google.username%></b> </a>
+                  <div class="up-item">
+                    <form action="/profiles" method="POST">
+                      <button class="flaticon-profile" class="btn btn-danger">
+                        profile
+                      </button>
+                    </form>
                   </div>
-                  <a href="#">Shopping Cart</a>
+
+                  <%if(currentProfile){%>
+
+                  <div class="up-item">
+                    <div class="shopping-card">
+                      <i class="flaticon-bag"></i>
+                      <span> <%=currentProfile.products.length%></span>
+                    </div>
+                    <div class="up-item">
+                      <a href="/profiles/new">Shopping Cart</a>
+                    </div>
+                  </div>
+
+                  <%}%>
+                  <a href="/logout">sign out </a>
+                  <%} %>
                 </div>
               </div>
             </div>
@@ -110,39 +134,5 @@
       </nav>
     </header>
     <!-- Header section end -->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">E-WEB</a>
-        </div>
-
-        <ul class=" nav navbar-right">
-          <% if(!currentUser){ %>
-          <li><a href="/login">login </a></li>
-          <li><a href="/register">sign up </a></li>
-          <% }else{%>
-          <li>
-            <a href=""><b><%=currentUser.username%></b> </a>
-          </li>
-          <li>
-            <form action="/profiles" method="POST">
-              <button class="btn btn-success">profile</button>
-            </form>
-          </li>
-          <%if(currentProfile){%>
-          <a href="/profiles/new">
-            <span
-              ><button class="btn btn-info">
-                <i class="fas fa-shopping-cart"></i>
-                <%=currentProfile.products.length%>
-              </button>
-            </span>
-          </a>
-          <%}%>
-          <li><a href="/logout">sign out </a></li>
-          <%} %>
-        </ul>
-      </div>
-    </nav>
   </body>
 </html>

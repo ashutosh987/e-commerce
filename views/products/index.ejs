@@ -1,49 +1,129 @@
 <%- include('../header'); -%>
-
-<div class="container">
-  <header class="jumbotron">
-    <div class="container">
-      <h>hello products</h>
-      <p>
-        this it the time to buy
-      </p>
-      <p>
-        <a class="btn btn-primary btn-large" href="/products/upload"
-          >create new</a
-        >
-      </p>
-
-      <form action="/products" method="GET" class="form-inline">
-        <div class="form-group">
-          <input
-            type="text"
-            name="search"
-            placeholder="products search.."
-            class="form-control"
-          />
-          <input type="submit" value="Search" class="btn btn-default" />
-        </div>
-      </form>
-    </div>
-  </header>
-
-  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+<!-- Hero section -->
+<section class="hero-section">
+  <div class="hero-slider owl-carousel">
     <% products.forEach(function(products){%>
-    <div class="col-md-3 col-sm-6">
-      <div class="thumbnail">
-        <img
-          width="200px"
-          margin="1px"
-          src="/products/image/<%=products.productimage %>"
-        />
-        <div class="caption">
-          <%=products.name%>
+    <div
+      class="hs-item set-bg"
+      data-setbg="/products/image/<%=products.productimage %>"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6 col-lg-7 text-white">
+            <span>New Arrivals</span>
+            <h2><%=products.productname %></h2>
+            <p>
+              <%=products.discription %>
+            </p>
+            <a href="#" class="site-btn sb-line">DISCOVER</a>
+            <a href="#" class="site-btn sb-white">ADD TO CART</a>
+          </div>
         </div>
-        <a href="/products/<%=products._id%>" class="btn btn-primary">detail</a>
+        <div class="offer-card text-white">
+          <span>from</span>
+          <h2><%=products.discription %></h2>
+          <p>SHOP NOW</p>
+        </div>
       </div>
     </div>
-
-    <%});%>
+    <%})%>
   </div>
-</div>
+
+  <div class="container">
+    <div class="slide-num-holder" id="snh-1"></div>
+  </div>
+</section>
+<!-- Hero section end -->
+
+<!-- Features section -->
+<section class="features-section">
+  <div class="container-fluid">
+    <a
+      class="btn btn-danger btn-lg btn-block btn-width"
+      href="/products/upload"
+    >
+      <h>UPLOAD YOUR PRODUCTS........</h>
+    </a>
+  </div>
+</section>
+<!-- Features section end -->
+
+<!-- letest product section -->
+<section class="top-letest-product-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>LATEST PRODUCTS</h2>
+    </div>
+    <div class="product-slider owl-carousel">
+      <% products.forEach(function(products){%>
+
+      <div class="product-item">
+        <a href="/products/<%=products._id%>"
+          ><i class="flaticon-bag"></i><span>details</span>
+          <div class="pi-pic">
+            <img
+              src="/products/image/<%=products.productimage %>"
+              href="/products/<%=products._id%>"
+            />
+            <div class="pi-links">
+              <a href="#" class="add-card"
+                ><i class="flaticon-bag"></i><span>ADD TO CART</span></a
+              >
+
+              <a href="#" class="wishlist-btn"
+                ><i class="flaticon-heart"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="pi-text">
+            <h6>"RS "<%=products.price%></h6>
+            <p><%=products.name%></p>
+          </div>
+        </a>
+      </div>
+
+      <%});%>
+    </div>
+  </div>
+</section>
+<!-- letest product section end -->
+
+<!-- Product filter section -->
+<section class="product-filter-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>BROWSE TOP SELLING PRODUCTS</h2>
+    </div>
+
+    <div class="row">
+      <% products.forEach(function(products){%>
+      <div class="col-lg-3 col-sm-6">
+        <div class="product-item">
+          <a href="/products/<%=products._id%>"
+            ><i class="flaticon-bag"></i><span>details</span>
+            <div class="pi-pic">
+              <img src="/products/image/<%=products.productimage %>" alt="" />
+              <div class="pi-links">
+                <a href="#" class="add-card"
+                  ><i class="flaticon-bag"></i><span>ADD TO CART</span></a
+                >
+                <a href="#" class="wishlist-btn"
+                  ><i class="flaticon-heart"></i
+                ></a>
+              </div>
+            </div>
+            <div class="pi-text">
+              <h6><%=products.price %></h6>
+              <p><%=products.productname %></p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <%});%>
+    </div>
+  </div>
+</section>
+<!-- Product filter section end -->
+
 <%- include('../footer'); -%>
