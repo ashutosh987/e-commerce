@@ -108,12 +108,15 @@ router.get("/", function(req, res) {
 //@route get/
 //@desc loads form
 router.get("/upload", middleware.isLoggedIn, (req, res) => {
-  Profile.findOne({id:req.user._id}, function (err,foundprofile) {
-    if(err)console.log(err);
-    else{
-      res.render("product_regi", { files: false , currentProfile:foundprofile});
-    }  
-    });
+  Profile.findOne({ id: req.user._id }, function(err, foundprofile) {
+    if (err) console.log(err);
+    else {
+      res.render("product_regi", {
+        files: false,
+        currentProfile: foundprofile
+      });
+    }
+  });
 });
 
 //@route POST/upload
@@ -135,6 +138,8 @@ router.post(
       productname: req.body.productname,
       price: req.body.price,
       productimage: req.file.filename,
+      description: req.body.description,
+
       seller: {
         id: req.user._id,
 

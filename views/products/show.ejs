@@ -1,62 +1,64 @@
 <%- include('../header'); %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <p class="lead">E-WEB</p>
-      <div class="list-group">
-        <li class="list-group-item active">item 1</li>
-        <li class="list-group-item">item 2</li>
-        <li class="list-group-item">item 3</li>
-      </div>
+<!-- Page info -->
+<div class="page-top-info">
+  <div class="container">
+    <h4>Products Details</h4>
+    <div class="site-pagination">
+      <a href="index.ejs">Home</a> /
+      <a href="">Shop</a>
     </div>
-    <div class="col-md-9">
-      <div class="thumbnail">
-        <img
-          class="img-responsive"
-          src="/products/image/<%=product.productimage %>"
-        />
-        <div class="caption-full">
-          <h4 class="pull-right">$400</h4>
-          <h4><a><%=product.productname%></a></h4>
-          <p><%=product.description%></p>
-          <p><%=product.price%></p>
-          <p><%=product.likes.length%></p>
+  </div>
+</div>
+<!-- Page info end -->
+
+<!-- product section -->
+<section class="product-section">
+  <div class="container">
+    <div class="back-link">
+      <a href="index.ejs"> &lt;&lt; Back to Category</a>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="product-pic-zoom">
+          <img
+            class="product-big-img"
+            src="/products/image/<%=product.productimage %>"
+            width="500px"
+            alt=""
+          />
+        </div>
+        <div
+          class="product-thumbs"
+          tabindex="1"
+          style="overflow: hidden; outline: none;"
+        ></div>
+      </div>
+      <div class="col-lg-6 product-details">
+        <h2 class="p-title"><%=product.productname %></h2>
+        <h2 class="p-title">
           <em>
             <p>submitted by<b><%=product.seller.username %></b></p>
           </em>
+        </h2>
 
-          <a class="btn btn-warning" href="/products/<%=product._id%>/edit"
-            >Edit</a
-          >
-          <form action="/profiles/add/<%=product._id%>" method="POST">
-            <button class="btn btn-info">
-              <i class="fas fa-shopping-cart"></i>add to cart
-            </button>
-          </form>
-
-          <form
-            id="delete-form"
-            action="/products/<%=product._id%>?_method=DELETE"
-            method="POST"
-          >
-            <button class="btn btn-danger">delete</button>
-          </form>
-          <%if(flag==1){%>
-          <form
-            id="like-form"
-            action="/products/like/<%=product._id%>?_method=PUT"
-            method="POST"
-          >
-            <button class="btn btn-success">like</button>
-          </form>
+        <h3 class="p-price"><%=product.price %></h3>
+        <h4 class="p-stock">Available: <span>In Stock</span></h4>
+        <div class="likes-card">
+            <i class="flaticon-bag"></i>
+            <span> <%=product.likes.length%></span>
+          </div>
+          <hr>
+        <%if(flag==1){%>
+        
 
           <form
             id="unlike-form"
             action="/products/unlike/<%=product._id%>?_method=PUT"
             method="POST"
           >
-            <button>unlike</button>
+          <button class="btn  btn-primary"><i class="fa fa-thumbs-down">unLike</i> </button>
+            
           </form>
 
           <%}else{%>
@@ -65,28 +67,85 @@
             action="/products/like/<%=product._id%>?_method=PUT"
             method="POST"
           >
-            <button>like</button>
+          <button class="btn  btn-primary"><i class="fa fa-thumbs-up">Like</i> </button>
           </form>
-          <form
-            id="unlike-form"
-            action="/products/unlike/<%=product._id%>?_method=PUT"
-            method="POST"
-          >
-            <button>unlike</button>
-          </form>
+          
 
           <%}%>
+          <hr>
+
+        <form action="/profiles/add/<%=product._id%>" method="POST">
+          <button class="btn btn-info">
+            <i class= class="site-btn"></i>add to cart
+          </button>
+        </form>
+<hr>
+        <a  href="/products/<%=product._id%>/comments/new" class="site-btn">ADD YOUR REVIEWS</a>
+
+        <div id="accordion" class="accordion-area">
+          <div class="panel">
+            <div class="panel-header" id="headingOne">
+              <button
+                class="panel-link active"
+                data-toggle="collapse"
+                data-target="#collapse1"
+                aria-expanded="true"
+                aria-controls="collapse1"
+              >
+                information
+              </button>
+            </div>
+            <div
+              id="collapse1"
+              class="collapse show"
+              aria-labelledby="headingOne"
+              data-parent="#accordion"
+            >
+              <div class="panel-body">
+                <p>
+                  <%=product.description %>
+                </p>
+              </div>
+            </div>
+
+           
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+<!-- product section end -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    
+
+         
+          <%  if (product.seller.id.equals(currentUser._id)) {%>
+          <form
+            id="delete-form"
+            action="/products/<%=product._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button class="site-btn">delete</button>
+          </form>
+          <%}%>
+         
+        </div>
+      </div>
+      <hr>
       <div class="well">
         <div class="rext-right">
           <a
-            class="btn btn-success"
+          class="site-btn"
             href="/products/<%=product._id%>/comments/new"
-            >add new comments</a
+            >ADD YOUR REVIEWS</a
           >
           <hr />
         </div>
+        <hr>
         <% product.comments.forEach(function(comment){%>
 
         <div class="row">
@@ -97,7 +156,7 @@
             <% if(currentUser &&
             comment.author.user_id.equals(currentUser._id)){ %>
             <a
-              class="btn btn-xs btn-warning"
+              class="btn btn-xs btn-success"
               href="/products/<%=product._id%>/comments/<%=comment._id%>/edit"
             >
               Edit</a
@@ -112,7 +171,7 @@
                 class="btn btn-xs btn-danger"
                 value="delete"
               />
-            </form>
+            </form><hr>
             <% } %>
           </div>
         </div>
