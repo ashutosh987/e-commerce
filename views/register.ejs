@@ -1,4 +1,5 @@
 <%- include('header'); %>
+<!--
 <h1>sign up</h1>
 
 <form action="/register" method="POST">
@@ -8,5 +9,21 @@
 
   <button>sign up</button>
 </form>
+-->
+<form style="width: 30em; margin-left: 25em;"   class="text-center border border-light p-5" action="/register" method="POST">
 
+  <p class="h4 mb-4">Sign up</p>
+
+  <!-- Email -->
+  <input type="email" id="defaultLoginFormEmail" name="email" class="form-control mb-4" placeholder="E-mail">
+
+  <!-- Password -->
+  <input type="password" id="defaultLoginFormPassword" name="password" class="form-control mb-4" placeholder="Password">
+
+
+  <!-- Sign up button -->
+  <button class="btn btn-info btn-block my-4" type="submit">Sign up</button>
+
+
+</form>
 <%- include('footer'); %>

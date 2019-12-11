@@ -1,5 +1,5 @@
 <%- include('header'); %>
-
+<!--
 <h1>edit your comment</h1>
 <form
   action="/products/<%= product_id %>/comments/<%=comment._id%>?_method=PUT"
@@ -8,6 +8,17 @@
   <input type="text" name="comment[text]" value="<%=comment.text%>" />
   <button>submit !</button>
 </form>
+-->
+<form style="width: 30em; margin-left: 25em;"   class="text-center border border-light p-5" action="/products/<%= product_id %>/comments/<%=comment._id%>?_method=PUT"
+  method="POST">
 
-<a href="/products"> Go Back!!! </a>
+  <p class="h4 mb-4">Edit your comment</p>
+
+  
+  <input type="text" id="defaultLoginFormEmail" name="comment[text]" value="<%=comment.text%>" class="form-control mb-4" placeholder="text">
+<br>
+  <button class="btn btn-info btn-block my-4" type="submit">Submit!</button>
+  <a href="/products"> Go Back!!! </a>
+
+</form>
 <%- include('footer'); %>

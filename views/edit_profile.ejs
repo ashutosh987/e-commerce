@@ -1,17 +1,19 @@
 <%- include('header'); %>
-<div class="container">
-<h1>edit your profile</h1>
+<br>
+<div class="container" style="background-color: gainsboro;"  >
+<h2>your profile</h2>
+<img width="200px" margin="5px" src="<%=profile.image %>" />
     <form
       action="/profiles/<%=profile._id%>"
       method="POST"
     >
-
-    <h4>name<h4><input type="text" name="name" value="<%=profile.name%>"/>
-    <h4>image<h4><input type="text" name="image" value="<%=profile.image%>"/>
-    <h4>email<h4><input type="text" name="email" value="<%=profile.email%>" />
+    <h4>Name : <h4><input type="text" name="name" value="<%=profile.name%>"/> 
+    <h4>Image : <h4><input type="text" name="image" value="<%=profile.image%>"/>
+    <h4>Email : <h4><input type="text" name="email" value="<%=profile.email%>" />
       <button>submit !</button>
     </form>
 
     <a href="/profiles/<%=profile._id%>"> Go Back!!! </a>
-    </div>
+  </div>
+    <br>
     <%- include('footer'); %>

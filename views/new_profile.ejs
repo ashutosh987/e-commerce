@@ -1,9 +1,7 @@
 <%- include('header'); %>
+<!--
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">E-WEB</a>
-    </div>
 
     <h1>complete your profile</h1>
     <form action="/profiles/new" method="POST">
@@ -17,4 +15,26 @@
     </form>
   </div>
 </nav>
+-->
+<form style="width: 30em; margin-left: 25em;"   class="text-center border border-light p-5" action="/profiles/new" method="POST">
+
+  <p class="h4 mb-4">Complete your profile</p>
+
+  <!-- Email -->
+  <input type="text" id="defaultLoginFormEmail" name="name" class="form-control mb-4" placeholder="full name">
+
+  <!-- Password -->
+  <input type="text" id="defaultLoginFormPassword"  name="image" class="form-control mb-4" placeholder="image">
+
+  <input type="text" id="defaultLoginFormPassword"  name="email" class="form-control mb-4" placeholder="Email">
+
+
+  <!-- Sign up button -->
+  <button class="btn btn-info btn-block my-4" type="submit">Submit</button>
+  <form action="/profiles" method="POST">
+    <button class="  btn-block my-4 btn btn-warning">skip</button>
+  </form>
+
+</form>
+
 <%- include('footer'); %>

@@ -1,9 +1,21 @@
 <%- include('header'); %>
+<!--
 <h1>Add a new comment to <%= product.productname %></h1>
 <form action="/products/<%= product._id %>/comments" method="POST">
   <input type="text" name="comment[text]" placeholder="text" />
   <button>submit !</button>
 </form>
+-->
+<form style="width: 30em; margin-left: 25em;"   class="text-center border border-light p-5" action="/products/<%= product._id %>/comments" method="POST">
 
-<a href="/products"> Go Back!!! </a>
+  <p class="h4 mb-4">Add new comment</p>
+
+  
+  <input type="text" id="defaultLoginFormEmail" name="comment[text]" class="form-control mb-4" placeholder="text">
+
+  <button class="btn btn-info btn-block my-4" type="submit">Submit!</button>
+  <a href="/products"> Go Back!!! </a>
+
+</form>
+
 <%- include('footer'); %>
