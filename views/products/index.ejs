@@ -1,36 +1,32 @@
 <%- include('../header'); -%>
+
 <!-- Hero section -->
 <section class="hero-section">
   <div class="hero-slider owl-carousel">
-    <% products.forEach(function(products){%>
     <div
       class="hs-item set-bg"
-      data-setbg="/products/image/<%=products.productimage %>"
+      data-setbg="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
     >
       <div class="container">
-        <div class="row">
-          <div class="col-xl-6 col-lg-7 text-white">
-            <span>New Arrivals</span>
-            <h2><%=products.productname %></h2>
-            <p>
-              <%=products.discription %>
-            </p>
-          </div>
-        </div>
-        <div class="offer-card text-white">
-          <span>from</span>
-          <h2><%=products.discription %></h2>
-          <p>SHOP NOW</p>
-        </div>
+        <div class="row"></div>
       </div>
     </div>
-    <%})%>
+    <div
+      class="hs-item set-bg"
+      data-setbg="https://images.unsplash.com/photo-1527600478564-488952effedb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+    >
+      <div class="container">
+        <div class="row"></div>
+      </div>
+    </div>
   </div>
-
   <div class="container">
     <div class="slide-num-holder" id="snh-1"></div>
   </div>
 </section>
+<!-- Hero section end -->
+<!-- Hero section -->
+
 <!-- Hero section end -->
 
 <!-- Features section -->
