@@ -211,12 +211,14 @@ router.get("/:id", function(req, res) {
       } else {
         var t = 0;
         var flag = 0;
-        foundproduct.likes.forEach(myFunction);
+        if (req.isAuthenticated()) {
+          foundproduct.likes.forEach(myFunction);
 
-        function myFunction(value) {
-          if (value.valueOf().equals(req.user._id)) {
-            t = 1;
-            // res.redirect("/products/" + foundProduct._id);
+          function myFunction(value) {
+            if (value.valueOf().equals(req.user._id)) {
+              t = 1;
+              // res.redirect("/products/" + foundProduct._id);
+            }
           }
         }
 
