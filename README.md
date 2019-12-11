@@ -1,7 +1,7 @@
 # e-commerse
 todo
 </br>
-check all links
+i have finished from my point...some can be done before deploying
 
 
 
