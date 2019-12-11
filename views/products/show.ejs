@@ -122,7 +122,7 @@
     <div class="col-md-3">
     
 
-         
+      <%if(flag==1){%>
           <%  if (product.seller.id.equals(currentUser._id)) {%>
           <form
             id="delete-form"
@@ -132,7 +132,7 @@
             <button class="site-btn">delete your product</button>
           </form>
           <%}%>
-         
+          <%}%>
         </div>
       </div>
       <hr>
