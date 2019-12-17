@@ -1,5 +1,5 @@
 <%- include('profile_header'); %>
-  <!--<h2>Name : <%= profile.name %></h2>-->
+<!--<h2>Name : <%= profile.name %></h2>-->
 <!--
   <% profile.products.forEach(function(product){%>
   <div class="row text-center" style="display:flex; flex-wrap: wrap;">
@@ -42,39 +42,43 @@
           <h3>Your Cart</h3>
           <div class="cart-table-warp">
             <table>
-            <thead>
-              <tr>
-                <th class="product-th">Product</th>
-                <th class="product-th">Seller</th>
-                <th class="total-th">Remove</th>
-                <th class="total-th">Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% profile.products.forEach(function(product){%>
-              <tr>
-                <td class="product-col">
-                  <img src="/products/image/<%=product.productimage %>" alt="">
-                  <div class="pc-title">
-                    <h4><%=product.productname%></h4>
-                  </div>
-                </td>
-                <td class="total-col"><h4><%=product.seller.username %></h4></td>
-                <td class="total-col">
-                  <form
-          id="delete-form"
-          action="/profiles/<%=profile._id%>/<%=product._id%>?_method=DELETE"
-          method="POST"
-        >
-          <button class="btn btn-danger">remove</button>
-        </form>
-                </td>
-                <td class="total-col"><h4><%=product.price%>/-</h4></td>
-              </tr>
-              <%})%>
-              
-            </tbody>
-          </table>
+              <thead>
+                <tr>
+                  <th class="product-th">Product</th>
+                  <th class="product-th">Seller</th>
+                  <th class="total-th">Remove</th>
+                  <th class="total-th">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% profile.products.forEach(function(product){%>
+                <tr>
+                  <td class="product-col">
+                    <img
+                      src="/products/image/<%=product.productimage %>"
+                      alt=""
+                    />
+                    <div class="pc-title">
+                      <h4><%=product.productname%></h4>
+                    </div>
+                  </td>
+                  <td class="total-col">
+                    <h4><%=product.seller.username %></h4>
+                  </td>
+                  <td class="total-col">
+                    <form
+                      id="delete-form"
+                      action="/profiles/<%=profile._id%>/<%=product._id%>?_method=DELETE"
+                      method="POST"
+                    >
+                      <button class="btn btn-danger">remove</button>
+                    </form>
+                  </td>
+                  <td class="total-col"><h4><%=product.price%>/-</h4></td>
+                </tr>
+                <%})%>
+              </tbody>
+            </table>
           </div>
           <div class="total-cost">
             <h6>Total <span><%=totalcost%>/-</span></h6>
@@ -82,7 +86,11 @@
         </div>
       </div>
       <div class="col-lg-4 card-right">
-        <a href=" http://localhost:3000/paywithpaytm?amount=<%=totalcost%>" class="site-btn">Proceed to checkout</a>
+        <a
+          href=" https://e-websiet.herokuapp.com/paywithpaytm?amount=<%=totalcost%>"
+          class="site-btn"
+          >Proceed to checkout</a
+        >
         <a href="/products" class="site-btn sb-dark">Continue shopping</a>
       </div>
     </div>
