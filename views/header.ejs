@@ -70,13 +70,12 @@
 
                   <a href=""><b><%=currentUser.google.username%></b> </a>
                   <div class="up-item">
-                      <% if(!currentUser){ %>
-                    <%if(currentProfile){%>
                     <div class="up-item">
                       <i class="flaticon-profile"></i>
                       <a href="/logout">sign out</a>
                     </div>
                   </div>
+                  <%if(currentProfile){%>
                   <div class="up-item">
                     <div class="shopping-card">
                       <i class="flaticon-bag"></i>
@@ -91,8 +90,7 @@
                       profile
                     </button>
                   </a>
-                  <%}%> 
-                  <%}%><%} %>
+                  <%}%> <%} %>
                 </div>
               </div>
             </div>
