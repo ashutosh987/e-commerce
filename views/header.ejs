@@ -70,6 +70,7 @@
 
                   <a href=""><b><%=currentUser.google.username%></b> </a>
                   <div class="up-item">
+                      <% if(!currentUser){ %>
                     <%if(currentProfile){%>
                     <div class="up-item">
                       <i class="flaticon-profile"></i>
@@ -90,7 +91,8 @@
                       profile
                     </button>
                   </a>
-                  <%}%> <%} %>
+                  <%}%> 
+                  <%}%><%} %>
                 </div>
               </div>
             </div>
