@@ -10,20 +10,48 @@
   <button>sign up</button>
 </form>
 -->
-<form style="width: 30em; margin-left: 25em;"   class="text-center border border-light p-5" action="/register" method="POST">
-
+<form
+  style="width: 30em; margin-left: 25em;"
+  class="text-center border border-light p-5"
+  action="/register"
+  method="POST"
+>
   <p class="h4 mb-4">Sign up</p>
 
   <!-- Email -->
-  <input type="email" id="defaultLoginFormEmail" name="email" class="form-control mb-4" placeholder="E-mail">
+  <input
+    type="email"
+    id="defaultLoginFormEmail"
+    name="email"
+    class="form-control mb-4"
+    placeholder="E-mail"
+  />
 
   <!-- Password -->
-  <input type="password" id="defaultLoginFormPassword" name="password" class="form-control mb-4" placeholder="Password">
-
+  <input
+    type="password"
+    id="defaultLoginFormPassword"
+    name="password"
+    class="form-control mb-4"
+    placeholder="Password"
+  />
 
   <!-- Sign up button -->
   <button class="btn btn-info btn-block my-4" type="submit">Sign up</button>
 
+  <p>
+    Not a member?
+    <a href="/register">Register</a>
+  </p>
 
+  <!-- Social login -->
+  <p>or sign in with:</p>
+
+  <a href="/auth/facebook" class="mx-2" role="button"
+    ><i class="fab fa-facebook-f light-blue-text"></i
+  ></a>
+  <a href="/auth/google" class="mx-2" role="button"
+    ><i class="fab fa-google" light-blue-text></i
+  ></a>
 </form>
 <%- include('footer'); %>

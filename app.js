@@ -1,7 +1,7 @@
 var express = require("express"),
   app = express(),
   mongoose = require("mongoose"),
-  server = app.listen(3000, listening),
+  server = app.listen(process.env.PORT || 3000, listening),
   bodyParser = require("body-parser"),
   Comment = require("./models/comment"),
   Product = require("./models/product"),
@@ -26,8 +26,7 @@ app.get("/paywithpaytm", (req, res) => {
     success => {
       res.render("paytmRedirect.ejs", {
         resultData: success,
-        paytmFinalUrl:
-          " https://securegw-stage.paytm.in/theia/processTransaction"
+        paytmFinalUrl: process.env.PAYTM_FINAL_URL
       });
     },
     error => {
@@ -115,13 +114,16 @@ app.set("view engine", "ejs");
 app.use("/products/:id/comments", commentRoutes);
 app.use("/profiles", profileRoutes);
 
-mongoose.connect("mongodb://localhost:27017/e--web", {
+var mongoURI = process.env.MONGO_URL;
+// "mongodb://localhost:27017/yelp_";
+
+mongoose.connect(mongoURI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true
 });
 
-const conn = mongoose.createConnection("mongodb://localhost:27017/e--web", {
+const conn = mongoose.createConnection(mongoURI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true

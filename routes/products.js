@@ -13,7 +13,7 @@ const crypto = require("crypto");
 const middleware = require("../middleware/index");
 const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
-const mongoURI = "mongodb://localhost:27017/e__web";
+const mongoURI = process.env.MONGO_URL;
 /*
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -42,7 +42,7 @@ const upload = multer({
 
 */
 
-const conn = mongoose.createConnection("mongodb://localhost:27017/e__web", {
+const conn = mongoose.createConnection(process.env.MONGO_URL, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true

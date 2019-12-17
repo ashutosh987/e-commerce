@@ -1,8 +1,8 @@
 module.exports = {
-  MID: "NmtQEV20480125911570",
-  PAYTM_MERCHANT_KEY: "j1WHOcFrZ93tnvk3",
-  PAYTM_FINAL_URL: "https://securegw-stage.paytm.in/theia/processTransaction",
-  WEBSITE: "WEBSTAGING",
+  MID: process.env.MID,
+  PAYTM_MERCHANT_KEY: process.env.PAYTM_MERCHANT_KEY,
+  PAYTM_FINAL_URL: process.env.PAYTM_FINAL_URL,
+  WEBSITE: process.env.WEBSITE,
   CHANNEL_ID: "WEB",
   INDUSTRY_TYPE_ID: "Retail",
   CALLBACK_URL: "http://localhost:3000/paywithpaytmresponse"
