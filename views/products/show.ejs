@@ -42,12 +42,12 @@
           </em>
         </h2>
 
-        <h3 class="p-price"><%=product.price %></h3>
+        <h3 class="p-price">Price:<span><%=product.price %></span></h3>
+        
         <h4 class="p-stock">Available: <span>In Stock</span></h4>
-        <div class="likes-card">
-            <i class="flaticon-bag"></i>
-            <span> <%=product.likes.length%></span>
-          </div>
+        <hr>
+        <h4 class="p-stock">No of likes: <span> <%=product.likes.length%></span></h4>
+   
           <hr>
         <%if(flag==1){%>
         
