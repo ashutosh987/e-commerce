@@ -10,32 +10,50 @@
 <a href="/auth/facebook"><button>facebook</button> </a>
 -->
 <!-- Default form login -->
-<form style="width: 30em; margin-left: 25em;"   class="text-center border border-light p-5" action="/login" method="POST">
-
+<form
+  style="width: 30em; margin-left: -2em;"
+  class="text-center border border-light p-5"
+  action="/login"
+  method="POST"
+>
   <p class="h4 mb-4">Sign in</p>
 
   <!-- Email -->
-  <input type="email" id="defaultLoginFormEmail" name="email" class="form-control mb-4" placeholder="E-mail">
+  <input
+    type="email"
+    id="defaultLoginFormEmail"
+    name="email"
+    class="form-control mb-4"
+    placeholder="E-mail"
+  />
 
   <!-- Password -->
-  <input type="password" id="defaultLoginFormPassword" name="password" class="form-control mb-4" placeholder="Password">
-
+  <input
+    type="password"
+    id="defaultLoginFormPassword"
+    name="password"
+    class="form-control mb-4"
+    placeholder="Password"
+  />
 
   <!-- Sign in button -->
   <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
 
   <!-- Register -->
-  <p>Not a member?
-      <a href="/register">Register</a>
+  <p>
+    Not a member?
+    <a href="/register">Register</a>
   </p>
 
   <!-- Social login -->
   <p>or sign in with:</p>
 
-  <a  href="/auth/facebook" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
-  <a  href="/auth/google" class="mx-2" role="button"><i class="fab fa-google" light-blue-text></i></a>
-  
-
+  <a href="/auth/facebook" class="mx-2" role="button"
+    ><i class="fab fa-facebook-f light-blue-text"></i
+  ></a>
+  <a href="/auth/google" class="mx-2" role="button"
+    ><i class="fab fa-google" light-blue-text></i
+  ></a>
 </form>
 <!-- Default form login -->
 
