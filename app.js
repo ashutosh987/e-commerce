@@ -55,16 +55,9 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
-  next();
-});
-
-app.use(function(req, res, next) {
   if (req.user) {
-    Profile.findOne({ id: req.user._id }, function(err, foundprofile) {
-      if (err) console.log(err);
-      else {
-        res.locals.currentProfile = foundprofile;
-      }
+    Profile.findOne({ id: req.user._id }, function(foundprofile) {
+      res.locals.currentProfile = foundprofile;
     });
   }
   next();
