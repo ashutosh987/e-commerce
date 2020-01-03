@@ -8,12 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Favicon -->
     <link href="/divisima/img/favicon.ico" rel="shortcut icon" />
-
+    <!-- Hotjar Tracking Code for https://e-websiet.herokuapp.com/ -->
+    <script>
+      (function(h, o, t, j, a, r) {
+        h.hj =
+          h.hj ||
+          function() {
+            (h.hj.q = h.hj.q || []).push(arguments);
+          };
+        h._hjSettings = { hjid: 1629883, hjsv: 6 };
+        a = o.getElementsByTagName("head")[0];
+        r = o.createElement("script");
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
+    </script>
     <!-- Google Font -->
     <script
-  src="https://kit.fontawesome.com/04dcd0359c.js"
-  crossorigin="anonymous"
-></script>
+      src="https://kit.fontawesome.com/04dcd0359c.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i"
       rel="stylesheet"
@@ -41,9 +56,7 @@
     </div>
 
     <!-- Header section -->
-    <% if(!currentUser){ %>
-
-        <% }else{%>
+    <% if(!currentUser){ %> <% }else{%>
     <header class="header-section">
       <div class="header-top">
         <div class="container">
@@ -68,10 +81,10 @@
             <div class="col-xl-4 col-lg-5">
               <div class="user-panel">
                 <%if(currentProfile){%>
-                    <div class="up-item">
-                        <i class="flaticon-profile"></i>
-                        <a href="/logout">sign out</a>
-                      </div>
+                <div class="up-item">
+                  <i class="flaticon-profile"></i>
+                  <a href="/logout">sign out</a>
+                </div>
                 <div class="up-item">
                   <div class="shopping-card">
                     <i class="flaticon-bag"></i>
@@ -84,8 +97,7 @@
                     profile
                   </button>
                 </a>
-                <%}%>
-                <%} %>
+                <%}%> <%} %>
               </div>
             </div>
           </div>
@@ -96,11 +108,9 @@
           <!-- menu -->
           <ul class="main-menu">
             <li><a href="/">Home</a></li>
-    
           </ul>
         </div>
       </nav>
     </header>
-    
   </body>
 </html>
